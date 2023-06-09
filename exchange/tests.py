@@ -86,6 +86,5 @@ class TestStringMethods(unittest.TestCase):
         assert e.pair.sell == 37.5
         assert e.pair.buy == 37.35
 
-#
 if __name__ == "__main__":
     unittest.main()
