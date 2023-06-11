@@ -7,7 +7,7 @@ from celery.schedules import crontab
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "exchange_rates.settings")
 
 app = Celery("exchange_rates")
-every_3_am = crontab(minute=0, hour=3)
+every_3_am = crontab(minute=1, hour=0)
 
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.
@@ -19,16 +19,16 @@ app.config_from_object("django.conf:settings", namespace="CELERY")
 app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
-    "mono-USD-UAH": {
-        "task": "exchange.tasks.start_exchange",
-        "schedule": every_3_am,
-        "args": ("mono", "USD", "UAH"),
-    },
-    "mono-EUR-UAH": {
-        "task": "exchange.tasks.start_exchange",
-        "schedule": every_3_am,
-        "args": ("mono", "EUR", "UAH"),
-    },
+    # "mono-USD-UAH": {
+    #     "task": "exchange.tasks.start_exchange",
+    #     "schedule": every_3_am,
+    #     "args": ("mono", "USD", "UAH"),
+    # },
+    # "mono-EUR-UAH": {
+    #     "task": "exchange.tasks.start_exchange",
+    #     "schedule": every_3_am,
+    #     "args": ("mono", "EUR", "UAH"),
+    # },
     "privat-EUR-UAH": {
         "task": "exchange.tasks.start_exchange",
         "schedule": every_3_am,
@@ -59,14 +59,14 @@ app.conf.beat_schedule = {
         "schedule": every_3_am,
         "args": ("nbu", "USD", "UAH"),
     },
-    "minfin-EUR-UAH": {
-        "task": "exchange.tasks.start_exchange",
-        "schedule": every_3_am,
-        "args": ("minfin", "EUR", "UAH"),
-    },
-    "minfin-USD-UAH": {
-        "task": "exchange.tasks.start_exchange",
-        "schedule": every_3_am,
-        "args": ("minfin", "USD", "UAH"),
-    },
+    # "minfin-EUR-UAH": {
+    #     "task": "exchange.tasks.start_exchange",
+    #     "schedule": every_3_am,
+    #     "args": ("minfin", "EUR", "UAH"),
+    # },
+    # "minfin-USD-UAH": {
+    #     "task": "exchange.tasks.start_exchange",
+    #     "schedule": every_3_am,
+    #     "args": ("minfin", "USD", "UAH"),
+    # },
 }

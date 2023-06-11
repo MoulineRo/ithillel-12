@@ -9,7 +9,7 @@ from django.shortcuts import render
 from exchange.forms import CounterForm
 from .models import Counter
 from .models import Rate
-
+from .tasks import start_exchange
 
 class DecimalAsFloatJSONEncoder(DjangoJSONEncoder):
     def default(self, o):

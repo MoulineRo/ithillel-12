@@ -3,25 +3,26 @@ import pathlib
 import unittest
 
 import responses
-from exchange.exchange_provider import MinfinExchange,MonoExchange,NbuExchange, PrivatExchange,VkurseExchange
+from exchange.exchange_provider import MonoExchange,NbuExchange, PrivatExchange,VkurseExchange
 
 root = pathlib.Path(__file__).parent
 
 class TestStringMethods(unittest.TestCase):
-    @responses.activate
-    def test_minfin(self):
-        mocked_response = json.load(open(root / "fixtures/minfin_response.json"))
-        responses.get(
-            "https://api.minfin.com.ua/mb/51bafed21077e7a570ec1af587f35c1155bef903/",
-            json=mocked_response,
-        )
-        e = MinfinExchange("minfin", "EUR", "UAH")
-        e.get_rate()
-        assert e.vendor == "minfin"
-        assert e.currency_a == "EUR"
-        assert e.currency_b == "UAH"
-        assert e.pair.sell == 39.8077
-        assert e.pair.buy == 39.4136
+    # @responses.activate
+    # def test_minfin(self):
+    #     mocked_response = json.load(open(root / "fixtures/minfin_response.json"))
+    #     responses.get(
+    #         "https://api.minfin.com.ua/mb/51bafed21077e7a570ec1af587f35c1155bef903/",
+    #         json=mocked_response,
+    #     )
+    #     e = MinfinExchange("minfin", "EUR", "UAH")
+    #     e.get_rate()
+    #     assert e.vendor == "minfin"
+    #     assert e.currency_a == "EUR"
+    #     assert e.currency_b == "UAH"
+    #     assert e.pair.sell == 39.8077
+    #     assert e.pair.buy == 39.4136
+
 
     @responses.activate
     def test_mono(self):

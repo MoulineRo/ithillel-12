@@ -2,14 +2,9 @@ import datetime
 
 from celery import shared_task
 
-from .exchange_provider import (
-    MonoExchange,
-    PrivatExchange,
-    VkurseExchange,
-    NbuExchange,
-    MinfinExchange,
-)
-from .models import Rate
+from exchange.exchange_provider import MonoExchange,PrivatExchange,VkurseExchange,NbuExchange
+
+from exchange.models import Rate
 
 
 @shared_task
@@ -67,13 +62,13 @@ def start_exchange(vendor, currency_a, currency_b):
             defaults={"sell": exchange.pair.sell, "buy": exchange.pair.buy},
         )
 
-    if vendor == "minfin":
-        exchange = MinfinExchange(vendor, currency_a, currency_b)
-        exchange.get_rate()
-        Rate.objects.get_or_create(
-            date=current_date,
-            vendor=vendor,
-            currency_a=currency_a,
-            currency_b=currency_b,
-            defaults={"sell": exchange.pair.sell, "buy": exchange.pair.buy},
-        )
+    # if vendor == "minfin":
+    #     exchange = MinfinExchange(vendor, currency_a, currency_b)
+    #     exchange.get_rate()
+    #     Rate.objects.get_or_create(
+    #         date=current_date,
+    #         vendor=vendor,
+    #         currency_a=currency_a,
+    #         currency_b=currency_b,
+    #         defaults={"sell": exchange.pair.sell, "buy": exchange.pair.buy},
+    #     )
