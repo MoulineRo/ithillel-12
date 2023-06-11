@@ -13,10 +13,10 @@ SECRET_KEY = "django-insecure-m-^oo)j_gty5jqk=-dy1une8c7sp%mfg#w^98k%2(e7j6xcdk*
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
-ALLOWED_HOSTS = ['herokupipe.herokuapp.com',
-                 'herokupipe-main-hleth2us5b9leb.herokuapp.com',
-                 '127.0.0.1']
+if IS_HEROKU_APP:
+    ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
