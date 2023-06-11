@@ -94,18 +94,18 @@ class NbuExchange(ExchangeBase):
                     self.pair = SellBuy(float(rate["rate"] + 1.5), float(rate["rate"]))
 
 
-class MinfinExchange(ExchangeBase):
-    def get_rate(self):
-        r = requests.get(
-            "https://api.minfin.com.ua/mb/51bafed21077e7a570ec1af587f35c1155bef903/"
-        )
-        r.raise_for_status()
-        for rate in r.json():
-            if rate["currency"] == "eur":
-                if "EUR" == self.currency_a and "UAH" == self.currency_b:
-                    self.pair = SellBuy(float(rate["ask"]), float(rate["bid"]))
-                    break
-            if rate["currency"] == "usd":
-                if "USD" == self.currency_a and "UAH" == self.currency_b:
-                    self.pair = SellBuy(float(rate["ask"]), float(rate["bid"]))
-                    break
+# class MinfinExchange(ExchangeBase):
+#     def get_rate(self):
+#         r = requests.get(
+#             "https://api.minfin.com.ua/mb/51bafed21077e7a570ec1af587f35c1155bef903/"
+#         )
+#         r.raise_for_status()
+#         for rate in r.json():
+#             if rate["currency"] == "eur":
+#                 if "EUR" == self.currency_a and "UAH" == self.currency_b:
+#                     self.pair = SellBuy(float(rate["ask"]), float(rate["bid"]))
+#                     break
+#             if rate["currency"] == "usd":
+#                 if "USD" == self.currency_a and "UAH" == self.currency_b:
+#                     self.pair = SellBuy(float(rate["ask"]), float(rate["bid"]))
+#                     break
