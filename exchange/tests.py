@@ -2,10 +2,7 @@ import json
 import pathlib
 import unittest
 
-import pytest
 import responses
-from django.core.management import call_command
-from freezegun import freeze_time
 from exchange.exchange_provider import MinfinExchange,MonoExchange,NbuExchange, PrivatExchange,VkurseExchange
 
 root = pathlib.Path(__file__).parent
@@ -86,6 +83,5 @@ class TestStringMethods(unittest.TestCase):
         assert e.pair.sell == 37.5
         assert e.pair.buy == 37.35
 
-#
 if __name__ == "__main__":
     unittest.main()
